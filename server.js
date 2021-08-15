@@ -28,8 +28,8 @@ app.use(express.json()) // use .json(), not .urlencoded()
 ///////////////////////////////////
 // // CONTROLLERS 
 // //////////////////////////////////
-// const animalController = require('./controllers/animals.js');
-// app.use('/animals', animalController);
+const animalController = require('./controllers/animals.js');
+app.use('/animals', animalController);
 
 
 ///////////////////////////////////
