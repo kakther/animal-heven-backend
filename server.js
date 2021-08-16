@@ -23,7 +23,9 @@ const MONGODB_URI = process.env.MONGODB_URI
 // MIDDLEWARE
 ///////////////////////////////////
 app.use(express.json()) // use .json(), not .urlencoded()
-
+app.get('/', (req, res) {
+  res.redirect('/animals');
+})
 
 ///////////////////////////////////
 // // CONTROLLERS 
@@ -52,9 +54,7 @@ mongoose.connect(
   mongoose.connection.on('disconnected', () => console.log('mongo disconnected'))
 // ///////////////////////////////////
 
-app.get('/animal', function (req, res) {
-  res.send('hello');
-})
+
 
 // LISTENER
 //////////////////////////////////
