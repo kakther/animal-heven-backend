@@ -51,6 +51,11 @@ mongoose.connect(
   mongoose.connection.on('error', err => console.log(err.message + ' is mongod not running?'))
   mongoose.connection.on('disconnected', () => console.log('mongo disconnected'))
 // ///////////////////////////////////
+
+app.get('/animal', function (req, res) {
+  res.send('hello');
+})
+
 // LISTENER
 //////////////////////////////////
 app.listen(PORT, () => {
