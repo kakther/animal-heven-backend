@@ -1,17 +1,19 @@
 const express = require('express');
-const Entry = require('../models/animals');
 const animals = express.Router();
+const Entry = require('../models/animals');
 
-
+// HOME
 animals.get('/', (req, res) => {
     Entry.find({}, (err, animalEntry) => {
+        console.log(animalEntry)
         res.json(animalEntry)
     })
 })
 
 
+//CREATE
 animals.post('/', (req, res) => {
-    Entry.create({}, (err, animalEntry) => {
+    Entry.create(req.body, (err, createAnimal) => {
         Entry.find({}, (err, animalEntry) => {
             res.json(animalEntry)
         })
@@ -19,25 +21,28 @@ animals.post('/', (req, res) => {
 }) 
 
 
-
+//UPDATE
 animals.put('/:id', (req, res) => {
-    Entry.findByIdAndUpdate(req.params.id, req.body, {new: true}, 
+    Entry.findByIdAndUpdate(
+        req.params.id, 
+        req.body, 
+        {new: true}, 
         (err, updateEntry) => {
             if(err){
                 res.send(err)
             }else{
-                Entry.find({}, (err, updateEntry) => {
-                    res.json(updateEntry)
+                Entry.find({}, (err, animalEntry) => {
+                    res.json(animalEntry)
                 })
             }
     })
 })
 
-
+//DELETE
 animals.delete('/:id', (req, res) => {
     Entry.findByIdAndRemove(req.params.id, (err, deletedEntry) => {
         Entry.find({}, (err, foundEntry) => {
-            res.json(foundEntry)
+            res.json(animalEntry)
         })
     })
 }) 
